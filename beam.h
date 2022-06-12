@@ -9,10 +9,10 @@ extern uint8_t segmentLength;
 
 void staticColor(CRGB color, uint8_t start, uint8_t end);
 void setupFastLED();
-void beamLoop();
 void lightsaber();
 void lighthouse();
 void torch();
 void colorNoise();
 void staticColor();
 void pixelOnSegment(uint8_t x);
+void bounce();

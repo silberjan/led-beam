@@ -16,8 +16,9 @@ void setup()
 
 void handleClick()
 {
-  mode = (mode + 1) % 3;
+  mode = (mode + 1) % 4;
   EEPROM.update(0, mode);
+  FastLED.clear(true);
 }
 
 void loop()
@@ -33,6 +34,9 @@ void loop()
     break;
   case 2:
     torch();
+    break;
+  case 3:
+    bounce();
     break;
   default:
     break;

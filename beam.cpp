@@ -15,10 +15,6 @@ void setupFastLED()
   FastLED.show();
 }
 
-void beamLoop()
-{
-}
-
 uint16_t x;
 uint16_t y;
 
@@ -86,4 +82,12 @@ void pixelOnSegment(uint8_t x)
   leds[segmentLength * 2 - 1 - x] = led_rgb;
   leds[x + segmentLength * 2] = led_rgb;
   leds[segmentLength * 4 - 1 - x] = led_rgb;
+}
+
+void bounce()
+{
+  uint8_t x = millis() * 0.125;
+  uint8_t pos = map(cubicwave8(x), 0, 255, 0, segmentLength - 1);
+  pixelOnSegment(pos);
+  fadeToBlackBy(leds, NUM_LEDS, 6);
 }
