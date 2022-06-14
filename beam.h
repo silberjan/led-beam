@@ -1,3 +1,6 @@
+#pragma once
+
+#define FASTLED_INTERNAL // Suppress build banner
 #include <FastLED.h>
 
 #define NUM_LEDS 48

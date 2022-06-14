@@ -1,4 +1,5 @@
 #include "beam.h"
+#include "fire.h"
 #include <OneButton.h>
 #include <EEPROM.h>
 
@@ -16,17 +17,17 @@ void setup()
 
 void handleClick()
 {
-  mode = (mode + 1) % 4;
+  mode = (mode + 1) % 5;
   EEPROM.update(0, mode);
   FastLED.clear(true);
 }
 
 void loop()
 {
-  colorNoise();
   switch (mode)
   {
   case 0:
+    colorNoise();
     lightsaber();
     break;
   case 1:
@@ -36,6 +37,9 @@ void loop()
     torch();
     break;
   case 3:
+    fire();
+    break;
+  case 4:
     bounce();
     break;
   default:
