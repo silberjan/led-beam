@@ -1,25 +1,13 @@
 #include "beam.h"
 #include "fire.h"
-#include <OneButton.h>
-#include <EEPROM.h>
-
-uint8_t mode = 0;
-OneButton btn;
+#include "state.h"
+#include "pulse.h"
 
 void setup()
 {
   Serial.begin(9600);
   setupFastLED();
-  btn = OneButton(3, false, false);
-  btn.attachClick(handleClick);
-  EEPROM.get(0, mode);
-}
-
-void handleClick()
-{
-  mode = (mode + 1) % 5;
-  EEPROM.update(0, mode);
-  FastLED.clear(true);
+  setupState();
 }
 
 void loop()
@@ -42,9 +30,12 @@ void loop()
   case 4:
     bounce();
     break;
+  case 5:
+    pulse();
+    break;
   default:
     break;
   }
   FastLED.show();
-  btn.tick();
+  stateLoop();
 }
