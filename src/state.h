@@ -8,7 +8,6 @@
 #define LED_PIN 2
 
 extern CRGB leds[];
-extern CRGB led_rgb;
 extern uint8_t segmentLength;
 
 extern uint8_t BPM;

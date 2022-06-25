@@ -22,6 +22,11 @@ OneButton btn;
 
 unsigned long taps[TAP_BUFFER_SIZE];
 
+CHSV getHSV()
+{
+  return CHSV(hue, sat, val);
+}
+
 void setupFastLED()
 {
   FastLED.addLeds<WS2812B, LED_PIN, GRB>(leds, NUM_LEDS);
@@ -98,7 +103,9 @@ void tapBpm()
 
 void changeMode()
 {
-  mode = (mode + 1) % 6;
+  mode = (mode + 1) % 9;
+  val = 255;
+  sat = 255;
   EEPROM.update(0, mode);
   FastLED.clear(true);
 }

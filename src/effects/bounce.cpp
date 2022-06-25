@@ -2,8 +2,7 @@
 
 void bounce()
 {
-  uint8_t x = beat8(BPM, taps[0]);
-  uint8_t pos = map(cubicwave8(x), 0, 255, 0, segmentLength - 1);
+  uint8_t pos = beatsin8(BPM / 2, 0, segmentLength);
   pixelOnSegment(pos);
-  fadeToBlackBy(leds, NUM_LEDS, 6);
+  fadeToBlackBy(leds, NUM_LEDS, 8);
 }

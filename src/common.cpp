@@ -8,12 +8,12 @@ void staticColor(CHSV const &color, uint8_t start, uint8_t end)
   }
 }
 
-void pixelOnSegment(uint8_t &x)
+void pixelOnSegment(uint8_t const &x)
 {
-  leds[x] = led_rgb;
-  leds[segmentLength * 2 - 1 - x] = led_rgb;
-  leds[x + segmentLength * 2] = led_rgb;
-  leds[segmentLength * 4 - 1 - x] = led_rgb;
+  leds[x] = getHSV();
+  leds[segmentLength * 2 - 1 - x] = getHSV();
+  leds[x + segmentLength * 2] = getHSV();
+  leds[segmentLength * 4 - 1 - x] = getHSV();
 }
 
 uint16_t noise_x;
@@ -25,5 +25,4 @@ void colorNoise()
   noise_y = beatsin8(10, 10, 30);
   uint8_t noise = inoise8(noise_x, noise_y);
   hue = map(noise, 50, 190, 0, 255);
-  led_rgb = CHSV(hue, sat, val);
 }

@@ -7,6 +7,9 @@
 #include "src/effects/torch.h"
 #include "src/effects/lighthouse.h"
 #include "src/effects/bounce.h"
+#include "src/effects/colorCycle.h"
+#include "src/effects/colorFlash.h"
+#include "src/effects/sparkle.h"
 
 void setup()
 {
@@ -20,8 +23,7 @@ void loop()
   switch (mode)
   {
   case 0:
-    colorNoise();
-    beacon();
+    colorCycle();
     break;
   case 1:
     lighthouse();
@@ -38,6 +40,14 @@ void loop()
   case 5:
     pulse();
     break;
+  case 6:
+    beacon();
+    break;
+  case 7:
+    colorFlash();
+    break;
+  case 8:
+    sparkle();
   default:
     break;
   }
