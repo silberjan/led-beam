@@ -9,7 +9,25 @@ uint8_t mode = 0;
 uint8_t BPM = 120;
 uint8_t beat = 0;
 
+CRGB leds[NUM_LEDS];
+CRGB led_rgb = CRGB::Blue;
+
+uint8_t hue = 0;
+uint8_t sat = 255;
+uint8_t val = 255;
+
+uint8_t segmentLength = 12;
+
 OneButton btn;
+
+unsigned long taps[TAP_BUFFER_SIZE];
+
+void setupFastLED()
+{
+  FastLED.addLeds<WS2812B, LED_PIN, GRB>(leds, NUM_LEDS);
+  FastLED.setBrightness(192);
+  FastLED.show();
+}
 
 void setupState()
 {

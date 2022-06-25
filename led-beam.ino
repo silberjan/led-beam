@@ -1,7 +1,12 @@
-#include "beam.h"
-#include "fire.h"
-#include "state.h"
-#include "pulse.h"
+#include "src/common.h"
+#include "src/state.h"
+
+#include "src/effects/fire.h"
+#include "src/effects/pulse.h"
+#include "src/effects/beacon.h"
+#include "src/effects/torch.h"
+#include "src/effects/lighthouse.h"
+#include "src/effects/bounce.h"
 
 void setup()
 {
@@ -16,7 +21,7 @@ void loop()
   {
   case 0:
     colorNoise();
-    lightsaber();
+    beacon();
     break;
   case 1:
     lighthouse();

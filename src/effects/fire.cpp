@@ -1,5 +1,5 @@
 #include "fire.h"
-#include "beam.h"
+#include "../state.h"
 
 #define HEIGHT 12
 #define WIDTH 4

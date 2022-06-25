@@ -1,5 +1,5 @@
 {
-    "port": "/dev/tty.usbmodem1101",
-    "board": "arduino:megaavr:nona4809",
-    "sketch": "led-beam.ino"
+  "port": "/dev/tty.usbmodem21301",
+  "board": "arduino:megaavr:nona4809",
+  "sketch": "led-beam.ino"
 }

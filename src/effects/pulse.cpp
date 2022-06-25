@@ -1,7 +1,5 @@
-#define FASTLED_INTERNAL // Suppress build banner
-#include <FastLED.h>
-#include "state.h"
-#include "beam.h"
+#include "../state.h"
+#include "../common.h"
 
 #include "pulse.h"
 
@@ -17,5 +15,5 @@ void pulse()
     pulseHue = random(0, 255);
     lastBeat = beat;
   }
-  staticColor(CHSV(pulseHue, 255, val), 0, NUM_LEDS - 1);
+  staticColor(CHSV(pulseHue, 255, val));
 }
