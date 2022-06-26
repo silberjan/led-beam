@@ -27,3 +27,4 @@ void setupState();
 void changeMode();
 void tapBpm();
 void stateLoop();
+void changeColor();

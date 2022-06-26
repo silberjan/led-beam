@@ -18,7 +18,8 @@ uint8_t val = 255;
 
 uint8_t segmentLength = 12;
 
-OneButton btn;
+OneButton btn1;
+OneButton btn2;
 
 unsigned long taps[TAP_BUFFER_SIZE];
 
@@ -36,15 +37,18 @@ void setupFastLED()
 
 void setupState()
 {
-  btn = OneButton(3, false, false);
-  btn.attachLongPressStart(changeMode);
-  btn.attachClick(tapBpm);
+  btn1 = OneButton(3, false, false);
+  btn1.attachLongPressStart(changeMode);
+  btn1.attachClick(tapBpm);
+  btn2 = OneButton(4, false, false);
+  btn2.attachClick(changeColor);
   EEPROM.get(0, mode);
 }
 
 void stateLoop()
 {
-  btn.tick();
+  btn1.tick();
+  btn2.tick();
   beat = millis() / (60000 / BPM);
 }
 
@@ -58,7 +62,7 @@ void addTap(unsigned long tap)
   if (taps[0] && tap - taps[0] > 5000)
   {
     memset(taps, 0, sizeof(taps));
-    Serial.println("Cleared taps");
+    // Serial.println("Cleared taps");
   }
   for (int i = TAP_BUFFER_SIZE - 1; i > 0; i--)
   {
@@ -75,30 +79,37 @@ void determineBpm()
   {
     if (taps[i + 1])
     {
-      Serial.print(taps[i] - taps[i + 1]);
-      Serial.print("ms ");
+      // Serial.print(taps[i] - taps[i + 1]);
+      // Serial.print("ms ");
       summedTimes += taps[i] - taps[i + 1];
       numberOfTimes++;
     }
   }
-  Serial.println("");
-  Serial.print(summedTimes);
-  Serial.print(" ");
-  Serial.println(numberOfTimes);
+  // Serial.println("");
+  // Serial.print(summedTimes);
+  // Serial.print(" ");
+  // Serial.println(numberOfTimes);
   if (numberOfTimes > 1)
   {
     BPM = 60000 / ((float)summedTimes / numberOfTimes);
-    Serial.print("Avg delay: ");
-    Serial.print(summedTimes / numberOfTimes);
-    Serial.print("ms BPM: ");
-    Serial.println(BPM);
+    // Serial.print("Avg delay: ");
+    // Serial.print(summedTimes / numberOfTimes);
+    // Serial.print("ms BPM: ");
+    // Serial.println(BPM);
   }
 }
 
 void tapBpm()
 {
+  Serial.println("btn1");
   addTap(millis());
   determineBpm();
+}
+
+void changeColor()
+{
+  Serial.println("btn2");
+  hue += 32;
 }
 
 void changeMode()
