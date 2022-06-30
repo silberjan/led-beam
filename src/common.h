@@ -9,6 +9,4 @@ void staticColor(CHSV const &color, uint8_t start = 0U, uint8_t end = NUM_LEDS -
 
 void pixelOnSegment(uint8_t const &x);
 
-void colorNoise();
-
 CHSV getHSV();

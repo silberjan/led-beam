@@ -2,12 +2,11 @@
 #include "src/state.h"
 
 #include "src/effects/fire.h"
-#include "src/effects/pulse.h"
+#include "src/effects/strobe.h"
 #include "src/effects/beacon.h"
 #include "src/effects/torch.h"
 #include "src/effects/lighthouse.h"
 #include "src/effects/bounce.h"
-#include "src/effects/colorCycle.h"
 #include "src/effects/colorFlash.h"
 #include "src/effects/sparkle.h"
 
@@ -23,33 +22,34 @@ void loop()
   switch (mode)
   {
   case 0:
-    colorCycle();
-    break;
-  case 1:
     lighthouse();
     break;
-  case 2:
+  case 1:
     torch();
     break;
-  case 3:
+  case 2:
     fire();
     break;
-  case 4:
+  case 3:
     bounce();
     break;
-  case 5:
-    pulse();
+  case 4:
+    strobe();
     break;
-  case 6:
+  case 5:
     beacon();
     break;
-  case 7:
+  case 6:
     colorFlash();
     break;
-  case 8:
+  case 7:
     sparkle();
   default:
     break;
+  }
+  if (dynamicColor)
+  {
+    dynamicColorLoop();
   }
   FastLED.show();
   stateLoop();

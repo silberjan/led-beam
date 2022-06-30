@@ -9,6 +9,8 @@ uint8_t mode = 0;
 uint8_t BPM = 120;
 uint8_t beat = 0;
 
+uint8_t lastBeat = 0;
+
 CRGB leds[NUM_LEDS];
 CRGB led_rgb = CRGB::Blue;
 
@@ -20,6 +22,8 @@ uint8_t segmentLength = 12;
 
 OneButton btn1;
 OneButton btn2;
+
+bool dynamicColor = false;
 
 unsigned long taps[TAP_BUFFER_SIZE];
 
@@ -42,6 +46,7 @@ void setupState()
   btn1.attachClick(tapBpm);
   btn2 = OneButton(4, false, false);
   btn2.attachClick(changeColor);
+  btn2.attachLongPressStart(changeColorMode);
   EEPROM.get(0, mode);
 }
 
@@ -114,9 +119,24 @@ void changeColor()
 
 void changeMode()
 {
-  mode = (mode + 1) % 9;
+  mode = (mode + 1) % 8;
   val = 255;
   sat = 255;
   EEPROM.update(0, mode);
   FastLED.clear(true);
+}
+
+void changeColorMode()
+{
+  dynamicColor = !dynamicColor;
+}
+
+void dynamicColorLoop()
+{
+  if (beat > lastBeat)
+  {
+    // change color on next beat
+    hue += 32;
+  }
+  lastBeat = beat;
 }

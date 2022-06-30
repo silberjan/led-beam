@@ -14,9 +14,13 @@ extern uint8_t BPM;
 extern uint8_t mode;
 extern uint8_t beat;
 
+extern uint8_t lastBeat;
+
 extern uint8_t hue;
 extern uint8_t sat;
 extern uint8_t val;
+
+extern bool dynamicColor;
 
 #define TAP_BUFFER_SIZE 6
 extern unsigned long taps[];
@@ -28,3 +32,5 @@ void changeMode();
 void tapBpm();
 void stateLoop();
 void changeColor();
+void changeColorMode();
+void dynamicColorLoop();
